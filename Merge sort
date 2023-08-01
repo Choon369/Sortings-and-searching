@@ -1,0 +1,60 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+class HelloWorld {
+    public static void conqure(int a[],int si,int mid,int ei)
+    {
+        int merge[] = new int[ei -si +1];
+        int id1 = si;
+        int id2 = mid+1;
+        int x = 0;
+        while(id1<=mid && id2 <=ei)
+        {
+            if(a[id1] <= a[id2])
+            {
+                merge[x++] =a[id1];
+                id1++;
+            }
+            else
+            {
+                merge[x++] =a[id2];
+                id2++;
+            }
+        }
+        while(id1 <= mid)
+        {
+            merge[x++] =a[id1++];
+        }
+        while(id2 <= ei)
+        {
+            merge[x++] =a[id2++];
+        }
+        for(int i=0 ,j =si ;i<merge.length;i++,j++)
+        {
+            a[j] =merge[i];
+        }
+        
+    }
+    public static void divide(int a[],int si,int ei)
+    {
+        if(si >= ei)
+        {
+            return ;
+            
+        }
+        int mid= si + (ei -si)/2;
+        divide(a, si,mid);
+        divide(a,mid +1,ei);
+        conqure(a,si,mid ,ei);
+    }
+
+     public static void main(String []args){
+        int a[] = {6,3,9,5,2,8};
+        int n = a.length;
+        divide(a,0,n-1);
+        for(int i =0; i<n;i++)
+        {
+            System.out.print(a[i]+",");
+        }
+     }
+}
